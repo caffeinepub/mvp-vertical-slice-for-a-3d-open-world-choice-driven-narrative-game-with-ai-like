@@ -1,0 +1,164 @@
+{
+  "kind": "feature_evidence_report",
+  "features": [
+    {
+      "featureId": "feature-create-an-mvp-gameplay-loop-vertical-slice-for-a-3d-third-person-open-world-narrative-game-a-small-explorable-neighborhood-map-player-movement-camera-controls-and-interactable-npcs-that-trigger-dialogue-and-quest-choices",
+      "featureTitle": "Create an MVP gameplay loop (vertical slice) for a 3D third-person open-world narrative game: a small explorable neighborhood map, player movement/camera controls, and interactable NPCs that trigger dialogue and quest choices.",
+      "files": [
+        "frontend/src/App.tsx",
+        "frontend/src/game/GameScreen.tsx",
+        "frontend/src/game/engine/WorldCanvas.tsx",
+        "frontend/src/game/engine/playerControls.ts",
+        "frontend/src/game/npc/npcPlacements.ts",
+        "frontend/src/game/state/useWorldRuntime.ts",
+        "frontend/src/game/ui/InteractionPrompt.tsx"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-1"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-implement-player-created-protagonist-setup-with-character-customization-options-for-appearance-and-personality-traits-and-persist-the-selected-configuration-for-the-logged-in-user",
+      "featureTitle": "Implement player-created protagonist setup with character customization options for appearance and personality/traits, and persist the selected configuration for the logged-in user.",
+      "files": [
+        "frontend/src/App.tsx",
+        "frontend/src/character/CharacterCreatorScreen.tsx",
+        "frontend/src/game/state/useProtagonist.ts",
+        "frontend/src/profile/ProfileSetupModal.tsx"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-2"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-add-a-branching-dialogue-and-choice-system-that-supports-multiple-dialogue-nodes-player-choices-conditional-availability-based-on-traits-flags-and-consequences-that-update-persistent-game-state",
+      "featureTitle": "Add a branching dialogue and choice system that supports: multiple dialogue nodes, player choices, conditional availability based on traits/flags, and consequences that update persistent game state.",
+      "files": [
+        "frontend/src/game/GameScreen.tsx",
+        "frontend/src/game/content/dialogues.ts",
+        "frontend/src/game/dialogue/dialogueTypes.ts",
+        "frontend/src/game/ui/DialoguePanel.tsx",
+        "frontend/src/game/ui/RelationshipWidget.tsx"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-3"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-implement-simplified-advanced-ai-like-npc-behaviors-using-deterministic-state-machines-not-external-ml-daily-schedule-states-wandering-idle-reacting-to-player-proximity-and-relationship-driven-dialogue-availability",
+      "featureTitle": "Implement simplified “advanced AI-like” NPC behaviors using deterministic state machines (not external ML): daily schedule states, wandering/idle, reacting to player proximity, and relationship-driven dialogue availability.",
+      "files": [
+        "frontend/src/game/engine/WorldCanvas.tsx",
+        "frontend/src/game/state/useGameClock.ts",
+        "frontend/src/game/state/useWorldRuntime.ts"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-4"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-add-quest-and-side-story-infrastructure-quest-definitions-objectives-branching-outcomes-and-a-journal-ui-that-tracks-main-story-and-at-least-2-side-quests-for-the-mvp-slice",
+      "featureTitle": "Add quest and side-story infrastructure: quest definitions, objectives, branching outcomes, and a journal UI that tracks main story and at least 2 side quests for the MVP slice.",
+      "files": [
+        "frontend/src/game/GameScreen.tsx",
+        "frontend/src/game/content/quests.ts",
+        "frontend/src/game/state/useWorldRuntime.ts",
+        "frontend/src/game/ui/QuestJournalPanel.tsx"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-5"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-content-compliance-guardrails-keep-the-narrative-adult-oriented-in-tone-while-ensuring-no-explicit-sexual-content-is-included-also-ensure-all-characters-locations-are-fully-original-and-do-not-use-or-reference-copyrighted-trademarked-the-young-and-the-restless-characters-names-or-likenesses",
+      "featureTitle": "Content & compliance guardrails: keep the narrative adult-oriented in tone while ensuring no explicit sexual content is included; also ensure all characters/locations are fully original and do not use or reference copyrighted/trademarked *The Young and the Restless* characters, names, or likenesses.",
+      "files": [
+        "frontend/src/App.tsx",
+        "frontend/src/game/content/dialogues.ts",
+        "frontend/src/game/content/quests.ts",
+        "frontend/src/title/TitleScreen.tsx"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-7"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-define-and-apply-a-cohesive-visual-theme-for-the-ui-colors-typography-layout-appropriate-for-a-mature-dramatic-soap-opera-inspired-game-and-use-it-consistently-across-title-screen-character-creation-quest-journal-and-dialogue-ui",
+      "featureTitle": "Define and apply a cohesive visual theme for the UI (colors, typography, layout) appropriate for a mature, dramatic soap-opera-inspired game, and use it consistently across title screen, character creation, quest journal, and dialogue UI.",
+      "files": [
+        "frontend/src/character/CharacterCreatorScreen.tsx",
+        "frontend/src/game/ui/DialoguePanel.tsx",
+        "frontend/src/game/ui/QuestJournalPanel.tsx",
+        "frontend/src/index.css",
+        "frontend/src/title/TitleScreen.tsx",
+        "frontend/tailwind.config.js"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-8"
+      ],
+      "confidence": "high"
+    }
+  ]
+}

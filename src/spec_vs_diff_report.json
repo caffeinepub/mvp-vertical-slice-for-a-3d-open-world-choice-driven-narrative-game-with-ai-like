@@ -1,0 +1,178 @@
+{
+  "kind": "spec_vs_diff_report",
+  "version": "1.0",
+  "generatedAt": "2026-02-09T01:38:37.706Z",
+  "summary": "The diff adds a Motoko backend actor with player/profile/game-state-related types and some query/mutation methods (truncated), plus a React frontend implementing an auth → profile setup → character creation → in-game 3D world flow with basic WASD movement, proximity-based NPC interaction, dialogue UI, quest journal UI, and relationship widget. Several key acceptance criteria are not evidenced: mouse-look camera, persistent flag/relationship consequences from dialogue, deterministic NPC state-machine behaviors (including time/flag-based movement), quest branching/completion persistence/world-state changes, stable backend persistence, and the required original-work disclaimer on title/settings. Some extra authorization/access-control infrastructure appears that was not requested.",
+  "missing_requirements": [
+    {
+      "id": "REQ-1",
+      "requirement": "Keyboard/mouse controls for movement and camera (mouse-look).",
+      "reason": "Movement via WASD/jump is implemented, but no mouse input is wired to camera rotation; the camera is hard-set behind the player each frame. The HUD text claims “Mouse: Look” but no code supports it.",
+      "evidence": [
+        "frontend/src/game/engine/PlayerController.tsx",
+        "frontend/src/game/engine/playerControls.ts",
+        "frontend/src/game/GameScreen.tsx"
+      ]
+    },
+    {
+      "id": "REQ-1",
+      "requirement": "Completing at least 1 short quest changes the world state (flag/NPC moves/quest marked completed).",
+      "reason": "Quest UI exists and dialogues can trigger adding quests, but no evidence of quest objective updates, completion, or any world-state change upon completion.",
+      "evidence": [
+        "frontend/src/game/ui/QuestJournalPanel.tsx",
+        "frontend/src/game/ui/DialoguePanel.tsx",
+        "frontend/src/game/content/quests.ts"
+      ]
+    },
+    {
+      "id": "REQ-2",
+      "requirement": "Character creation must include at minimum: name, a few appearance options, and at least 3 personality/trait selections.",
+      "reason": "Character creator includes appearance presets and three numeric traits, plus a background, but no user-entered protagonist name field is shown.",
+      "evidence": [
+        "frontend/src/character/CharacterCreatorScreen.tsx"
+      ]
+    },
+    {
+      "id": "REQ-2",
+      "requirement": "Chosen customization is saved and reloaded on refresh/login.",
+      "reason": "Frontend calls a createProtagonist mutation, but backend persistence is not evidenced as stable (only in-memory Maps shown), and the backend code is truncated before showing stable storage and full load paths.",
+      "evidence": [
+        "backend/main.mo",
+        "frontend/src/App.tsx",
+        "frontend/src/game/state/useProtagonist.ts"
+      ]
+    },
+    {
+      "id": "REQ-2",
+      "requirement": "Customization impacts at least one in-game outcome (e.g., dialogue option gated by a trait or relationship change magnitude influenced by a trait).",
+      "reason": "Trait-gated dialogue choices exist (e.g., minExtroversion), but the system does not apply relationship changes or flags in the dialogue runner, so the consequences and trait-driven impact beyond locking choices are not fully implemented.",
+      "evidence": [
+        "frontend/src/game/content/dialogues.ts",
+        "frontend/src/game/ui/DialoguePanel.tsx"
+      ]
+    },
+    {
+      "id": "REQ-3",
+      "requirement": "At least 1 choice sets a persistent flag that changes a later dialogue line or available option.",
+      "reason": "Dialogue content defines effects.setFlags, but the dialogue runner does not apply setFlags to persistent state (it only triggers quests). No later dialogue variance driven by persisted flags is evidenced.",
+      "evidence": [
+        "frontend/src/game/content/dialogues.ts",
+        "frontend/src/game/ui/DialoguePanel.tsx"
+      ]
+    },
+    {
+      "id": "REQ-3",
+      "requirement": "At least 1 choice changes an NPC relationship/affinity value, and that value is displayed somewhere in UI.",
+      "reason": "RelationshipWidget displays npcRelationships, and dialogue content defines relationshipChanges, but DialoguePanel does not apply relationshipChanges to persistent state, so the change mechanism is missing.",
+      "evidence": [
+        "frontend/src/game/ui/RelationshipWidget.tsx",
+        "frontend/src/game/content/dialogues.ts",
+        "frontend/src/game/ui/DialoguePanel.tsx"
+      ]
+    },
+    {
+      "id": "REQ-4",
+      "requirement": "Deterministic NPC behaviors via state machines: idle/wander/talk/busy, reacting to player proximity, and relationship-driven dialogue availability.",
+      "reason": "NPCs are static entities with an initialState field, and proximity detection exists for interaction prompts, but no per-NPC state machine transitions, wandering, or relationship/flag-driven dialogue availability is implemented in runtime logic.",
+      "evidence": [
+        "frontend/src/game/engine/NPCEntities.tsx",
+        "frontend/src/game/npc/npcPlacements.ts",
+        "frontend/src/game/state/useWorldRuntime.ts"
+      ]
+    },
+    {
+      "id": "REQ-4",
+      "requirement": "At least 1 NPC changes location based on time-of-day or a quest flag.",
+      "reason": "A time-of-day clock exists and is returned from useWorldRuntime, but it is not used to move NPCs; NPC placements are fixed constants.",
+      "evidence": [
+        "frontend/src/game/state/useGameClock.ts",
+        "frontend/src/game/state/useWorldRuntime.ts",
+        "frontend/src/game/npc/npcPlacements.ts"
+      ]
+    },
+    {
+      "id": "REQ-5",
+      "requirement": "Quest infrastructure with branching outcomes, journal tracking main story + 2 side quests, persistence, and quest outcomes modifying dialogue availability and/or NPC behaviors.",
+      "reason": "Quest definitions include 1 main quest + 2 side quests and a journal UI lists quests, but there is no evidence of branching outcomes, completion persistence, objective progression, or any linkage where quest outcomes alter dialogue availability or NPC behaviors.",
+      "evidence": [
+        "frontend/src/game/content/quests.ts",
+        "frontend/src/game/ui/QuestJournalPanel.tsx",
+        "frontend/src/game/ui/DialoguePanel.tsx"
+      ]
+    },
+    {
+      "id": "REQ-6",
+      "requirement": "Motoko stable storage for user profiles, character customization, world/quest flags, NPC relationship values, and last known player location; CRUD-style methods; keyed by authenticated principal; reload restores state.",
+      "reason": "The backend shows in-memory Maps and some profile/protagonist methods, but no stable variables or upgrade-safe persistence is evidenced, and the file is truncated before showing complete CRUD coverage (quests/flags/relationships/location).",
+      "evidence": [
+        "backend/main.mo"
+      ]
+    },
+    {
+      "id": "REQ-7",
+      "requirement": "Show a brief disclaimer on the title screen or in settings that the game is an original work inspired by soap-opera drama (generic phrasing, no trademark usage).",
+      "reason": "TitleScreen is referenced but not included in the diff summary; no disclaimer text is evidenced in any shown UI file.",
+      "evidence": [
+        "frontend/src/App.tsx"
+      ]
+    },
+    {
+      "id": "REQ-8",
+      "requirement": "Cohesive visual theme applied consistently across title screen, character creation, quest journal, and dialogue UI; avoid default/basic styling; do not rely on blue/purple as primary brand colors.",
+      "reason": "Some styling is present (dark translucent overlays), but TitleScreen is not shown, and there is no explicit theme system/palette/typography definition evidenced across screens; primary color constraints cannot be verified from the provided diff summary.",
+      "evidence": [
+        "frontend/src/game/GameScreen.tsx",
+        "frontend/src/game/ui/DialoguePanel.tsx",
+        "frontend/src/game/ui/QuestJournalPanel.tsx",
+        "frontend/src/character/CharacterCreatorScreen.tsx",
+        "frontend/src/App.tsx"
+      ]
+    }
+  ],
+  "hallucinated_features": [
+    {
+      "description": "Role/permission-based authorization layer (AccessControl, MixinAuthorization, admin/user permission checks) added to the single Motoko actor.",
+      "reason": "The BuildRequest requires Internet Identity-keyed persistence in a single actor but does not request a custom access-control/roles subsystem or admin permission model.",
+      "evidence": [
+        "backend/main.mo"
+      ]
+    }
+  ],
+  "confidence": 0.72,
+  "changed_files": [
+    "all_files_summary.json",
+    "backend/main.mo",
+    "frontend-file-summaries.txt",
+    "frontend/index.css",
+    "frontend/index.html",
+    "frontend/src/App.tsx",
+    "frontend/src/character/CharacterCreatorScreen.tsx",
+    "frontend/src/game/GameScreen.tsx",
+    "frontend/src/game/content/dialogues.ts",
+    "frontend/src/game/content/quests.ts",
+    "frontend/src/game/dialogue/dialogueTypes.ts",
+    "frontend/src/game/engine/NPCEntities.tsx",
+    "frontend/src/game/engine/PlayerController.tsx",
+    "frontend/src/game/engine/WorldCanvas.tsx",
+    "frontend/src/game/engine/WorldEnvironment.tsx",
+    "frontend/src/game/engine/playerControls.ts",
+    "frontend/src/game/npc/npcPlacements.ts",
+    "frontend/src/game/state/useGameClock.ts",
+    "frontend/src/game/state/useProtagonist.ts",
+    "frontend/src/game/state/useWorldRuntime.ts",
+    "frontend/src/game/ui/DialoguePanel.tsx",
+    "frontend/src/game/ui/InteractionPrompt.tsx",
+    "frontend/src/game/ui/QuestJournalPanel.tsx",
+    "frontend/src/game/ui/RelationshipWidget.tsx",
+    "frontend/src/hooks/useActor.ts",
+    "frontend/src/hooks/useInternetIdentity.ts",
+    "frontend/src/hooks/useQueries.ts",
+    "frontend/src/index.css",
+    "frontend/src/main.tsx",
+    "frontend/src/profile/ProfileSetupModal.tsx",
+    "frontend/src/title/TitleScreen.tsx",
+    "frontend/src/utils/urlParams.ts",
+    "frontend/tailwind.config.js",
+    "project_state.json"
+  ]
+}

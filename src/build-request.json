@@ -1,0 +1,188 @@
+{
+  "kind": "build_request",
+  "title": "MVP vertical slice for a 3D open-world, choice-driven narrative game with AI-like NPC behaviors (original soap-opera-inspired setting)",
+  "priority": "normal",
+  "requirements": [
+    {
+      "id": "REQ-1",
+      "text": "Create an MVP gameplay loop (vertical slice) for a 3D third-person open-world narrative game: a small explorable neighborhood map, player movement/camera controls, and interactable NPCs that trigger dialogue and quest choices.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-1"
+        ],
+        "quotes": [
+          "The project is a 3D open-world video game featuring advanced artificial intelligence systems, inspired by the fictional daytime soap opera *The Young and the Restless*.\n\nPlayers control a custom-created protagonist... dynamically interacts with a rich cast of NPCs... open-choice mechanics... multiple branching side quests..."
+        ]
+      },
+      "acceptanceCriteria": [
+        "A playable 3D scene loads in the browser with keyboard/mouse controls for movement and camera.",
+        "At least 1 small open area exists (e.g., a neighborhood block) with basic collision/boundaries to prevent falling out of the world.",
+        "At least 3 NPCs are placed in the world and can be interacted with (e.g., proximity + keypress) to open a dialogue UI.",
+        "Completing at least 1 short quest changes the world state (e.g., an NPC moves, a flag changes, or a quest is marked completed)."
+      ]
+    },
+    {
+      "id": "REQ-2",
+      "text": "Implement player-created protagonist setup with character customization options for appearance and personality/traits, and persist the selected configuration for the logged-in user.",
+      "target": "both",
+      "source": {
+        "messageIds": [
+          "msg-1"
+        ],
+        "quotes": [
+          "Players control a custom-created protagonist with complete character customization options, allowing total creative freedom in appearance, personality, and choices."
+        ]
+      },
+      "acceptanceCriteria": [
+        "A character creation flow exists before gameplay (or via a menu) where the user can set at minimum: name, a few appearance options (e.g., hair/skin/outfit presets), and at least 3 personality/trait selections.",
+        "The chosen customization is saved and reloaded on refresh/login.",
+        "The customization impacts at least one in-game outcome (e.g., a dialogue option gated by a trait, or NPC affinity change magnitude influenced by a trait)."
+      ]
+    },
+    {
+      "id": "REQ-3",
+      "text": "Add a branching dialogue and choice system that supports: multiple dialogue nodes, player choices, conditional availability based on traits/flags, and consequences that update persistent game state.",
+      "target": "both",
+      "source": {
+        "messageIds": [
+          "msg-1"
+        ],
+        "quotes": [
+          "The gameplay supports open-choice mechanics, enabling players to influence the main storyline and multiple branching side quests."
+        ]
+      },
+      "acceptanceCriteria": [
+        "At least 2 separate dialogue scenes exist with branching choices (minimum 2 branches each).",
+        "At least 1 choice sets a persistent flag that changes a later dialogue line or available option.",
+        "At least 1 choice changes an NPC relationship/affinity value, and that value is displayed somewhere in UI.",
+        "Dialogue content is stored in a structured form (e.g., a JSON-like schema in frontend or a Motoko data structure) rather than hardcoded directly in JSX strings per line."
+      ]
+    },
+    {
+      "id": "REQ-4",
+      "text": "Implement simplified “advanced AI-like” NPC behaviors using deterministic state machines (not external ML): daily schedule states, wandering/idle, reacting to player proximity, and relationship-driven dialogue availability.",
+      "target": "both",
+      "source": {
+        "messageIds": [
+          "msg-1"
+        ],
+        "quotes": [
+          "...advanced artificial intelligence systems... NPCs, each driven by AI behaviors, to create immersive social and story-driven experiences."
+        ]
+      },
+      "acceptanceCriteria": [
+        "Each NPC has a behavior state (e.g., idle/wander/talk/busy) that changes over time or due to player interaction.",
+        "At least 1 NPC changes location based on an in-game time-of-day value or a quest flag.",
+        "NPC dialogue options differ based on relationship value and/or quest flags.",
+        "No third-party AI/LLM APIs are required to run NPC behaviors."
+      ]
+    },
+    {
+      "id": "REQ-5",
+      "text": "Add quest and side-story infrastructure: quest definitions, objectives, branching outcomes, and a journal UI that tracks main story and at least 2 side quests for the MVP slice.",
+      "target": "both",
+      "source": {
+        "messageIds": [
+          "msg-1"
+        ],
+        "quotes": [
+          "...multiple branching side quests... several Side Story lines..."
+        ]
+      },
+      "acceptanceCriteria": [
+        "A quest journal UI lists active/completed quests and current objectives.",
+        "The MVP includes 1 main quest and 2 side quests with at least one branching outcome each.",
+        "Quest completion and branching outcomes persist across refresh/login.",
+        "Quest outcomes can modify dialogue availability and/or NPC behaviors."
+      ]
+    },
+    {
+      "id": "REQ-6",
+      "text": "Backend persistence: create Motoko types and stable storage for user profiles, character customization, world/quest flags, NPC relationship values, and last known player location within the MVP world.",
+      "target": "backend",
+      "source": {
+        "messageIds": [
+          "msg-1"
+        ],
+        "quotes": [
+          "...original character dynamically interacts... enabling players to influence the main storyline and multiple branching side quests."
+        ]
+      },
+      "acceptanceCriteria": [
+        "Backend exposes CRUD-style methods for loading/saving: player profile, character config, quest state, relationship values, and world flags.",
+        "Data is keyed by the authenticated principal (Internet Identity).",
+        "After reload, the user returns to the same saved state for quests/flags/relationships.",
+        "All backend state uses the single-actor architecture (no additional canisters/services)."
+      ]
+    },
+    {
+      "id": "REQ-7",
+      "text": "Content & compliance guardrails: keep the narrative adult-oriented in tone while ensuring no explicit sexual content is included; also ensure all characters/locations are fully original and do not use or reference copyrighted/trademarked *The Young and the Restless* characters, names, or likenesses.",
+      "target": "both",
+      "source": {
+        "messageIds": [
+          "msg-1"
+        ],
+        "quotes": [
+          "...inspired by the fictional daytime soap opera *The Young and the Restless*... adult-oriented narrative..."
+        ]
+      },
+      "acceptanceCriteria": [
+        "All user-facing names, factions, and locations in the MVP are original (no Y&R character names or show-specific identifiers).",
+        "No explicit sexual content is present in dialogue, UI text, or assets.",
+        "A brief disclaimer is shown on the title screen or in settings indicating the game is an original work inspired by soap-opera drama (generic phrasing, no trademark usage)."
+      ]
+    },
+    {
+      "id": "REQ-8",
+      "text": "Define and apply a cohesive visual theme for the UI (colors, typography, layout) appropriate for a mature, dramatic soap-opera-inspired game, and use it consistently across title screen, character creation, quest journal, and dialogue UI.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-1"
+        ],
+        "quotes": [
+          "...adult-oriented narrative... inspired by... daytime soap opera..."
+        ]
+      },
+      "acceptanceCriteria": [
+        "A consistent palette and typography system is applied across primary screens (title/menu, character creator, in-game HUD/dialogue, quest journal).",
+        "The theme avoids default/basic styling and feels intentionally art-directed.",
+        "The theme does not rely on blue/purple as the primary brand colors."
+      ]
+    }
+  ],
+  "constraints": [
+    "Use English for any user-facing text.",
+    "Do not include pornographic, explicit sexual content, or incest content.",
+    "Do not use or reference copyrighted/trademarked *The Young and the Restless* character names, likenesses, or show-specific identifiers; keep characters and setting fully original.",
+    "Backend must remain a single Motoko actor (no additional backend services).",
+    "Do not modify files under frontend immutablePaths (compose existing UI components instead)."
+  ],
+  "nonGoals": [
+    "Delivering a full 100+ hour campaign in the initial build (only an MVP vertical slice is required).",
+    "Using real machine-learning model inference or third-party AI/LLM integrations for NPC behavior.",
+    "Multiplayer or real-time networking features."
+  ],
+  "imageRequirements": {
+    "required": [
+      "Game title screen background: moody upscale suburban night scene with soft cinematic lighting, no text (title-bg.dim_1920x1080.png)",
+      "Game logo mark: minimalist dramatic emblem (e.g., rose + broken ring motif), monochrome (logo-mark.dim_512x512.png)",
+      "Quest journal icon set: 6 small UI icons in a consistent line style (journal-icons.dim_256x256.png)"
+    ],
+    "edits": []
+  },
+  "userProfileUpdate": {
+    "goalsToAdd": [],
+    "goalsToRemove": [],
+    "preferencesToAdd": [
+      "Use English for any user-facing text."
+    ],
+    "preferencesToRemove": [],
+    "miscToAdd": [],
+    "miscToRemove": [],
+    "fieldsToSet": {},
+    "fieldsToDelete": []
+  }
+}
